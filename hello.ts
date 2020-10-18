@@ -5,7 +5,7 @@ type OptionalKeysOf<T extends object> = Exclude<{
 }[keyof T], undefined>
 
 type OptionalPartOf<T extends object> = {
-  [key in OptionalKeysOf<T>]: T[key]
+  [key in OptionalKeysOf<T>]: NonNullable<T[key]>
 }
 
 type Props = {
@@ -13,9 +13,9 @@ type Props = {
   email?: string
 }
 
-type DefaultProps = Required<OptionalPartOf<Props>>;
+type DefaultOptionalProps = OptionalPartOf<Props>;
 
-const defaultProps: DefaultProps = {
+const defaultProps: DefaultOptionalProps = {
   email: 'aaa@test.com'
 }
 
